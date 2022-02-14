@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<div class="container">
+<div class="container-fluid">
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
@@ -11,7 +11,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <example-component></example-component>
+                    <dashboard-component></dashboard-component>
                 </div>
             </div>
         </div>

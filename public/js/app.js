@@ -1899,10 +1899,10 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js&":
-/*!***************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/DashboardComponent.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/DashboardComponent.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -2056,9 +2056,64 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  name: "DashboardComponent",
+  data: function data() {
+    return {
+      userChatList: [],
+      attributes: null
+    };
+  },
+  methods: {
+    getUserChatList: function getUserChatList() {
+      var _this = this;
+
+      var url = "".concat(baseUrl, "/chat/user-list");
+      this.$axios.post(url, this.attributes).then(function (response) {
+        if (response.status == 200) {
+          if (response.data.status == 200) {
+            _this.userChatList = response.data.userList;
+            console.log(_this.userChatList);
+          }
+        }
+      })["catch"](function (error) {
+        console.log(error);
+        console.log("Something Went wrong, please try again after sometimes");
+      });
+    }
+  },
   mounted: function mounted() {
-    console.log('Component mounted.');
+    this.getUserChatList();
   }
 });
 
@@ -6431,10 +6486,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ExampleComponent.vue?vue&type=style&index=0&id=299e239e&scoped=true&lang=css&":
-/*!**********************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ExampleComponent.vue?vue&type=style&index=0&id=299e239e&scoped=true&lang=css& ***!
-  \**********************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/DashboardComponent.vue?vue&type=style&index=0&id=01ab55f4&scoped=true&lang=css&":
+/*!************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/DashboardComponent.vue?vue&type=style&index=0&id=01ab55f4&scoped=true&lang=css& ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6443,7 +6498,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.container[data-v-299e239e]{max-width:1170px; margin:auto;}\nimg[data-v-299e239e]{ max-width:100%;}\n.inbox_people[data-v-299e239e] {\n  background: #f8f8f8 none repeat scroll 0 0;\n  float: left;\n  overflow: hidden;\n  width: 40%; border-right:1px solid #c4c4c4;\n}\n.inbox_msg[data-v-299e239e] {\n  border: 1px solid #c4c4c4;\n  clear: both;\n  overflow: hidden;\n}\n.top_spac[data-v-299e239e]{ margin: 20px 0 0;}\n.recent_heading[data-v-299e239e] {float: left; width:40%;}\n.srch_bar[data-v-299e239e] {\n  display: inline-block;\n  text-align: right;\n  width: 60%;\n}\n.headind_srch[data-v-299e239e]{ padding:10px 29px 10px 20px; overflow:hidden; border-bottom:1px solid #c4c4c4;}\n.recent_heading h4[data-v-299e239e] {\n  color: #05728f;\n  font-size: 21px;\n  margin: auto;\n}\n.srch_bar input[data-v-299e239e]{ border:1px solid #cdcdcd; border-width:0 0 1px 0; width:80%; padding:2px 0 4px 6px; background:none;}\n.srch_bar .input-group-addon button[data-v-299e239e] {\n  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;\n  border: medium none;\n  padding: 0;\n  color: #707070;\n  font-size: 18px;\n}\n.srch_bar .input-group-addon[data-v-299e239e] { margin: 0 0 0 -27px;}\n.chat_ib h5[data-v-299e239e]{ font-size:15px; color:#464646; margin:0 0 8px 0;}\n.chat_ib h5 span[data-v-299e239e]{ font-size:13px; float:right;}\n.chat_ib p[data-v-299e239e]{ font-size:14px; color:#989898; margin:auto}\n.chat_img[data-v-299e239e] {\n  float: left;\n  width: 11%;\n}\n.chat_ib[data-v-299e239e] {\n  float: left;\n  padding: 0 0 0 15px;\n  width: 88%;\n}\n.chat_people[data-v-299e239e]{ overflow:hidden; clear:both;}\n.chat_list[data-v-299e239e] {\n  border-bottom: 1px solid #c4c4c4;\n  margin: 0;\n  padding: 18px 16px 10px;\n}\n.inbox_chat[data-v-299e239e] { height: 550px; overflow-y: scroll;}\n.active_chat[data-v-299e239e]{ background:#ebebeb;}\n.incoming_msg_img[data-v-299e239e] {\n  display: inline-block;\n  width: 6%;\n}\n.received_msg[data-v-299e239e] {\n  display: inline-block;\n  padding: 0 0 0 10px;\n  vertical-align: top;\n  width: 92%;\n}\n.received_withd_msg p[data-v-299e239e] {\n  background: #ebebeb none repeat scroll 0 0;\n  border-radius: 3px;\n  color: #646464;\n  font-size: 14px;\n  margin: 0;\n  padding: 5px 10px 5px 12px;\n  width: 100%;\n}\n.time_date[data-v-299e239e] {\n  color: #747474;\n  display: block;\n  font-size: 12px;\n  margin: 8px 0 0;\n}\n.received_withd_msg[data-v-299e239e] { width: 57%;}\n.mesgs[data-v-299e239e] {\n  float: left;\n  padding: 30px 15px 0 25px;\n  width: 60%;\n}\n.sent_msg p[data-v-299e239e] {\n  background: #05728f none repeat scroll 0 0;\n  border-radius: 3px;\n  font-size: 14px;\n  margin: 0; color:#fff;\n  padding: 5px 10px 5px 12px;\n  width:100%;\n}\n.outgoing_msg[data-v-299e239e]{ overflow:hidden; margin:26px 0 26px;}\n.sent_msg[data-v-299e239e] {\n  float: right;\n  width: 46%;\n}\n.input_msg_write input[data-v-299e239e] {\n  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;\n  border: medium none;\n  color: #4c4c4c;\n  font-size: 15px;\n  min-height: 48px;\n  width: 100%;\n}\n.type_msg[data-v-299e239e] {border-top: 1px solid #c4c4c4;position: relative;}\n.msg_send_btn[data-v-299e239e] {\n  background: #05728f none repeat scroll 0 0;\n  border: medium none;\n  border-radius: 50%;\n  color: #fff;\n  cursor: pointer;\n  font-size: 17px;\n  height: 33px;\n  position: absolute;\n  right: 0;\n  top: 11px;\n  width: 33px;\n}\n.messaging[data-v-299e239e] { padding: 0 0 50px 0;}\n.msg_history[data-v-299e239e] {\n  height: 516px;\n  overflow-y: auto;\n}\n", ""]);
+exports.push([module.i, "\n.container[data-v-01ab55f4] {\n    max-width: 1170px;\n    margin: auto;\n}\nimg[data-v-01ab55f4] {\n    max-width: 100%;\n}\n.inbox_people[data-v-01ab55f4] {\n    background: #f8f8f8 none repeat scroll 0 0;\n    float: left;\n    overflow: hidden;\n    width: 30%;\n    border-right: 1px solid #c4c4c4;\n}\n.inbox_msg[data-v-01ab55f4] {\n    border: 1px solid #c4c4c4;\n    clear: both;\n    overflow: hidden;\n}\n.top_spac[data-v-01ab55f4] {\n    margin: 20px 0 0;\n}\n.recent_heading[data-v-01ab55f4] {\n    float: left;\n    width: 40%;\n}\n.srch_bar[data-v-01ab55f4] {\n    display: inline-block;\n    text-align: right;\n    width: 60%;\n}\n.headind_srch[data-v-01ab55f4] {\n    padding: 10px 29px 10px 20px;\n    overflow: hidden;\n    border-bottom: 1px solid #c4c4c4;\n}\n.recent_heading h4[data-v-01ab55f4] {\n    color: #05728f;\n    font-size: 21px;\n    margin: auto;\n}\n.srch_bar input[data-v-01ab55f4] {\n    border: 1px solid #cdcdcd;\n    border-width: 0 0 1px 0;\n    width: 80%;\n    padding: 2px 0 4px 6px;\n    background: none;\n}\n.srch_bar .input-group-addon button[data-v-01ab55f4] {\n    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;\n    border: medium none;\n    padding: 0;\n    color: #707070;\n    font-size: 18px;\n}\n.srch_bar .input-group-addon[data-v-01ab55f4] {\n    margin: 0 0 0 -27px;\n}\n.chat_ib h5[data-v-01ab55f4] {\n    font-size: 15px;\n    color: #464646;\n    margin: 0 0 8px 0;\n}\n.chat_ib h5 span[data-v-01ab55f4] {\n    font-size: 13px;\n    float: right;\n}\n.chat_ib p[data-v-01ab55f4] {\n    font-size: 14px;\n    color: #989898;\n    margin: auto;\n}\n.chat_img[data-v-01ab55f4] {\n    float: left;\n    width: 11%;\n}\n.chat_ib[data-v-01ab55f4] {\n    float: left;\n    padding: 0 0 0 15px;\n    width: 88%;\n}\n.chat_people[data-v-01ab55f4] {\n    overflow: hidden;\n    clear: both;\n}\n.chat_list[data-v-01ab55f4] {\n    border-bottom: 1px solid #c4c4c4;\n    margin: 0;\n    padding: 18px 16px 10px;\n}\n.inbox_chat[data-v-01ab55f4] {\n    height: 550px;\n    overflow-y: scroll;\n}\n.active_chat[data-v-01ab55f4] {\n    background: #ebebeb;\n}\n.incoming_msg_img[data-v-01ab55f4] {\n    display: inline-block;\n    width: 6%;\n}\n.received_msg[data-v-01ab55f4] {\n    display: inline-block;\n    padding: 0 0 0 10px;\n    vertical-align: top;\n    width: 92%;\n}\n.received_withd_msg p[data-v-01ab55f4] {\n    background: #ebebeb none repeat scroll 0 0;\n    border-radius: 3px;\n    color: #646464;\n    font-size: 14px;\n    margin: 0;\n    padding: 5px 10px 5px 12px;\n    width: 100%;\n}\n.time_date[data-v-01ab55f4] {\n    color: #747474;\n    display: block;\n    font-size: 12px;\n    margin: 8px 0 0;\n}\n.received_withd_msg[data-v-01ab55f4] {\n    width: 57%;\n}\n.mesgs[data-v-01ab55f4] {\n    float: left;\n    padding: 30px 15px 0 25px;\n    width: 70%;\n}\n.sent_msg p[data-v-01ab55f4] {\n    background: #05728f none repeat scroll 0 0;\n    border-radius: 3px;\n    font-size: 14px;\n    margin: 0;\n    color: #fff;\n    padding: 5px 10px 5px 12px;\n    width: 100%;\n}\n.outgoing_msg[data-v-01ab55f4] {\n    overflow: hidden;\n    margin: 26px 0 26px;\n}\n.sent_msg[data-v-01ab55f4] {\n    float: right;\n    width: 46%;\n}\n.input_msg_write input[data-v-01ab55f4] {\n    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;\n    border: medium none;\n    color: #4c4c4c;\n    font-size: 15px;\n    min-height: 48px;\n    width: 100%;\n}\n.type_msg[data-v-01ab55f4] {\n    border-top: 1px solid #c4c4c4;\n    position: relative;\n}\n.msg_send_btn[data-v-01ab55f4] {\n    background: #05728f none repeat scroll 0 0;\n    border: medium none;\n    border-radius: 50%;\n    color: #fff;\n    cursor: pointer;\n    font-size: 17px;\n    height: 33px;\n    position: absolute;\n    right: 0;\n    top: 11px;\n    width: 33px;\n}\n.messaging[data-v-01ab55f4] {\n    padding: 0 0 50px 0;\n}\n.msg_history[data-v-01ab55f4] {\n    height: 516px;\n    overflow-y: auto;\n}\n", ""]);
 
 // exports
 
@@ -37666,15 +37721,15 @@ process.umask = function() { return 0; };
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ExampleComponent.vue?vue&type=style&index=0&id=299e239e&scoped=true&lang=css&":
-/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ExampleComponent.vue?vue&type=style&index=0&id=299e239e&scoped=true&lang=css& ***!
-  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/DashboardComponent.vue?vue&type=style&index=0&id=01ab55f4&scoped=true&lang=css&":
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/DashboardComponent.vue?vue&type=style&index=0&id=01ab55f4&scoped=true&lang=css& ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./ExampleComponent.vue?vue&type=style&index=0&id=299e239e&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ExampleComponent.vue?vue&type=style&index=0&id=299e239e&scoped=true&lang=css&");
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./DashboardComponent.vue?vue&type=style&index=0&id=01ab55f4&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/DashboardComponent.vue?vue&type=style&index=0&id=01ab55f4&scoped=true&lang=css&");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -38280,10 +38335,10 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ExampleComponent.vue?vue&type=template&id=299e239e&scoped=true&":
-/*!*******************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ExampleComponent.vue?vue&type=template&id=299e239e&scoped=true& ***!
-  \*******************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/DashboardComponent.vue?vue&type=template&id=01ab55f4&scoped=true&":
+/*!*********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/DashboardComponent.vue?vue&type=template&id=01ab55f4&scoped=true& ***!
+  \*********************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -38295,376 +38350,277 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "container-fluid" }, [
+    _c("h3", { staticClass: "text-center" }, [_vm._v("Messaging")]),
+    _vm._v(" "),
+    _c("div", { staticClass: "messaging" }, [
+      _c("div", { staticClass: "inbox_msg" }, [
+        _c("div", { staticClass: "inbox_people" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "inbox_chat" },
+            _vm._l(_vm.userChatList, function (user, userIndex) {
+              return _vm.userChatList.length > 0
+                ? _c(
+                    "div",
+                    {
+                      key: userIndex,
+                      staticClass: "chat_list",
+                      class: userIndex == 0 ? "active_chat" : "",
+                    },
+                    [
+                      _c("div", { staticClass: "chat_people" }, [
+                        _c("div", { staticClass: "chat_img" }, [
+                          _c("img", {
+                            attrs: {
+                              src: "https://ptetutorials.com/images/user-profile.png",
+                              alt: user.name,
+                            },
+                          }),
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "chat_ib" }, [
+                          _c("h5", [
+                            _vm._v(
+                              "\n                                    " +
+                                _vm._s(user.name) +
+                                "\n                                    "
+                            ),
+                            _c("span", { staticClass: "chat_date" }, [
+                              _vm._v("Dec 25"),
+                            ]),
+                          ]),
+                          _vm._v(" "),
+                          _c("p", [
+                            _vm._v(
+                              "\n                                   " +
+                                _vm._s(user.bio) +
+                                "\n                                "
+                            ),
+                          ]),
+                        ]),
+                      ]),
+                    ]
+                  )
+                : _c("div", { staticClass: "chat_list" }, [_vm._m(1)])
+            }),
+            0
+          ),
+        ]),
+        _vm._v(" "),
+        _vm._m(2),
+      ]),
+      _vm._v(" "),
+      _vm._m(3),
+    ]),
+  ])
 }
 var staticRenderFns = [
   function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("h3", { staticClass: " text-center" }, [_vm._v("Messaging")]),
+    return _c("div", { staticClass: "headind_srch" }, [
+      _c("div", { staticClass: "recent_heading" }, [
+        _c("h4", [_vm._v("Recent")]),
+      ]),
       _vm._v(" "),
-      _c("div", { staticClass: "messaging" }, [
-        _c("div", { staticClass: "inbox_msg" }, [
-          _c("div", { staticClass: "inbox_people" }, [
-            _c("div", { staticClass: "headind_srch" }, [
-              _c("div", { staticClass: "recent_heading" }, [
-                _c("h4", [_vm._v("Recent")]),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "srch_bar" }, [
-                _c("div", { staticClass: "stylish-input-group" }, [
-                  _c("input", {
-                    staticClass: "search-bar",
-                    attrs: { type: "text", placeholder: "Search" },
-                  }),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "input-group-addon" }, [
-                    _c("button", { attrs: { type: "button" } }, [
-                      _c("i", {
-                        staticClass: "fa fa-search",
-                        attrs: { "aria-hidden": "true" },
-                      }),
-                    ]),
-                  ]),
-                ]),
-              ]),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "inbox_chat" }, [
-              _c("div", { staticClass: "chat_list active_chat" }, [
-                _c("div", { staticClass: "chat_people" }, [
-                  _c("div", { staticClass: "chat_img" }, [
-                    _c("img", {
-                      attrs: {
-                        src: "https://ptetutorials.com/images/user-profile.png",
-                        alt: "sunil",
-                      },
-                    }),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "chat_ib" }, [
-                    _c("h5", [
-                      _vm._v("Sunil Rajput "),
-                      _c("span", { staticClass: "chat_date" }, [
-                        _vm._v("Dec 25"),
-                      ]),
-                    ]),
-                    _vm._v(" "),
-                    _c("p", [
-                      _vm._v(
-                        "Test, which is a new approach to have all solutions \n                            astrology under one roof."
-                      ),
-                    ]),
-                  ]),
-                ]),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "chat_list" }, [
-                _c("div", { staticClass: "chat_people" }, [
-                  _c("div", { staticClass: "chat_img" }, [
-                    _c("img", {
-                      attrs: {
-                        src: "https://ptetutorials.com/images/user-profile.png",
-                        alt: "sunil",
-                      },
-                    }),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "chat_ib" }, [
-                    _c("h5", [
-                      _vm._v("Sunil Rajput "),
-                      _c("span", { staticClass: "chat_date" }, [
-                        _vm._v("Dec 25"),
-                      ]),
-                    ]),
-                    _vm._v(" "),
-                    _c("p", [
-                      _vm._v(
-                        "Test, which is a new approach to have all solutions \n                            astrology under one roof."
-                      ),
-                    ]),
-                  ]),
-                ]),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "chat_list" }, [
-                _c("div", { staticClass: "chat_people" }, [
-                  _c("div", { staticClass: "chat_img" }, [
-                    _c("img", {
-                      attrs: {
-                        src: "https://ptetutorials.com/images/user-profile.png",
-                        alt: "sunil",
-                      },
-                    }),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "chat_ib" }, [
-                    _c("h5", [
-                      _vm._v("Sunil Rajput "),
-                      _c("span", { staticClass: "chat_date" }, [
-                        _vm._v("Dec 25"),
-                      ]),
-                    ]),
-                    _vm._v(" "),
-                    _c("p", [
-                      _vm._v(
-                        "Test, which is a new approach to have all solutions \n                            astrology under one roof."
-                      ),
-                    ]),
-                  ]),
-                ]),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "chat_list" }, [
-                _c("div", { staticClass: "chat_people" }, [
-                  _c("div", { staticClass: "chat_img" }, [
-                    _c("img", {
-                      attrs: {
-                        src: "https://ptetutorials.com/images/user-profile.png",
-                        alt: "sunil",
-                      },
-                    }),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "chat_ib" }, [
-                    _c("h5", [
-                      _vm._v("Sunil Rajput "),
-                      _c("span", { staticClass: "chat_date" }, [
-                        _vm._v("Dec 25"),
-                      ]),
-                    ]),
-                    _vm._v(" "),
-                    _c("p", [
-                      _vm._v(
-                        "Test, which is a new approach to have all solutions \n                            astrology under one roof."
-                      ),
-                    ]),
-                  ]),
-                ]),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "chat_list" }, [
-                _c("div", { staticClass: "chat_people" }, [
-                  _c("div", { staticClass: "chat_img" }, [
-                    _c("img", {
-                      attrs: {
-                        src: "https://ptetutorials.com/images/user-profile.png",
-                        alt: "sunil",
-                      },
-                    }),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "chat_ib" }, [
-                    _c("h5", [
-                      _vm._v("Sunil Rajput "),
-                      _c("span", { staticClass: "chat_date" }, [
-                        _vm._v("Dec 25"),
-                      ]),
-                    ]),
-                    _vm._v(" "),
-                    _c("p", [
-                      _vm._v(
-                        "Test, which is a new approach to have all solutions \n                            astrology under one roof."
-                      ),
-                    ]),
-                  ]),
-                ]),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "chat_list" }, [
-                _c("div", { staticClass: "chat_people" }, [
-                  _c("div", { staticClass: "chat_img" }, [
-                    _c("img", {
-                      attrs: {
-                        src: "https://ptetutorials.com/images/user-profile.png",
-                        alt: "sunil",
-                      },
-                    }),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "chat_ib" }, [
-                    _c("h5", [
-                      _vm._v("Sunil Rajput "),
-                      _c("span", { staticClass: "chat_date" }, [
-                        _vm._v("Dec 25"),
-                      ]),
-                    ]),
-                    _vm._v(" "),
-                    _c("p", [
-                      _vm._v(
-                        "Test, which is a new approach to have all solutions \n                            astrology under one roof."
-                      ),
-                    ]),
-                  ]),
-                ]),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "chat_list" }, [
-                _c("div", { staticClass: "chat_people" }, [
-                  _c("div", { staticClass: "chat_img" }, [
-                    _c("img", {
-                      attrs: {
-                        src: "https://ptetutorials.com/images/user-profile.png",
-                        alt: "sunil",
-                      },
-                    }),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "chat_ib" }, [
-                    _c("h5", [
-                      _vm._v("Sunil Rajput "),
-                      _c("span", { staticClass: "chat_date" }, [
-                        _vm._v("Dec 25"),
-                      ]),
-                    ]),
-                    _vm._v(" "),
-                    _c("p", [
-                      _vm._v(
-                        "Test, which is a new approach to have all solutions \n                            astrology under one roof."
-                      ),
-                    ]),
-                  ]),
-                ]),
-              ]),
+      _c("div", { staticClass: "srch_bar" }, [
+        _c("div", { staticClass: "stylish-input-group" }, [
+          _c("input", {
+            staticClass: "search-bar",
+            attrs: { type: "text", placeholder: "Search" },
+          }),
+          _vm._v(" "),
+          _c("span", { staticClass: "input-group-addon" }, [
+            _c("button", { attrs: { type: "button" } }, [
+              _c("i", {
+                staticClass: "fa fa-search",
+                attrs: { "aria-hidden": "true" },
+              }),
             ]),
           ]),
+        ]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "chat_people" }, [
+      _c("div", { staticClass: "chat_img" }, [
+        _c("img", {
+          attrs: {
+            src: "https://ptetutorials.com/images/user-profile.png",
+            alt: "sunil",
+          },
+        }),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "chat_ib" }, [
+        _c("h5", [
+          _vm._v(
+            "\n                                    No user chats available\n                                    "
+          ),
+          _c("span", { staticClass: "chat_date" }, [_vm._v("Dec 25")]),
+        ]),
+        _vm._v(" "),
+        _c("p", [
+          _vm._v(
+            "\n                                    Test, which is a new approach to have\n                                    all solutions astrology under one roof.\n                                "
+          ),
+        ]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "mesgs" }, [
+      _c("div", { staticClass: "msg_history" }, [
+        _c("div", { staticClass: "incoming_msg" }, [
+          _c("div", { staticClass: "incoming_msg_img" }, [
+            _c("img", {
+              attrs: {
+                src: "https://ptetutorials.com/images/user-profile.png",
+                alt: "sunil",
+              },
+            }),
+          ]),
           _vm._v(" "),
-          _c("div", { staticClass: "mesgs" }, [
-            _c("div", { staticClass: "msg_history" }, [
-              _c("div", { staticClass: "incoming_msg" }, [
-                _c("div", { staticClass: "incoming_msg_img" }, [
-                  _c("img", {
-                    attrs: {
-                      src: "https://ptetutorials.com/images/user-profile.png",
-                      alt: "sunil",
-                    },
-                  }),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "received_msg" }, [
-                  _c("div", { staticClass: "received_withd_msg" }, [
-                    _c("p", [
-                      _vm._v(
-                        "Test which is a new approach to have all\n                            solutions"
-                      ),
-                    ]),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "time_date" }, [
-                      _vm._v(" 11:01 AM    |    June 9"),
-                    ]),
-                  ]),
-                ]),
+          _c("div", { staticClass: "received_msg" }, [
+            _c("div", { staticClass: "received_withd_msg" }, [
+              _c("p", [
+                _vm._v(
+                  "\n                                    Test which is a new approach to have all\n                                    solutions\n                                "
+                ),
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "outgoing_msg" }, [
-                _c("div", { staticClass: "sent_msg" }, [
-                  _c("p", [
-                    _vm._v(
-                      "Test which is a new approach to have all\n                        solutions"
-                    ),
-                  ]),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "time_date" }, [
-                    _vm._v(" 11:01 AM    |    June 9"),
-                  ]),
-                ]),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "incoming_msg" }, [
-                _c("div", { staticClass: "incoming_msg_img" }, [
-                  _c("img", {
-                    attrs: {
-                      src: "https://ptetutorials.com/images/user-profile.png",
-                      alt: "sunil",
-                    },
-                  }),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "received_msg" }, [
-                  _c("div", { staticClass: "received_withd_msg" }, [
-                    _c("p", [_vm._v("Test, which is a new approach to have")]),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "time_date" }, [
-                      _vm._v(" 11:01 AM    |    Yesterday"),
-                    ]),
-                  ]),
-                ]),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "outgoing_msg" }, [
-                _c("div", { staticClass: "sent_msg" }, [
-                  _c("p", [_vm._v("Apollo University, Delhi, India Test")]),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "time_date" }, [
-                    _vm._v(" 11:01 AM    |    Today"),
-                  ]),
-                ]),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "incoming_msg" }, [
-                _c("div", { staticClass: "incoming_msg_img" }, [
-                  _c("img", {
-                    attrs: {
-                      src: "https://ptetutorials.com/images/user-profile.png",
-                      alt: "sunil",
-                    },
-                  }),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "received_msg" }, [
-                  _c("div", { staticClass: "received_withd_msg" }, [
-                    _c("p", [
-                      _vm._v(
-                        "We work directly with our designers and suppliers,\n                            and sell direct to you, which means quality, exclusive\n                            products, at a price anyone can afford."
-                      ),
-                    ]),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "time_date" }, [
-                      _vm._v(" 11:01 AM    |    Today"),
-                    ]),
-                  ]),
-                ]),
-              ]),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "type_msg" }, [
-              _c("div", { staticClass: "input_msg_write" }, [
-                _c("input", {
-                  staticClass: "write_msg",
-                  attrs: { type: "text", placeholder: "Type a message" },
-                }),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  { staticClass: "msg_send_btn", attrs: { type: "button" } },
-                  [
-                    _c("i", {
-                      staticClass: "fa fa-paper-plane-o",
-                      attrs: { "aria-hidden": "true" },
-                    }),
-                  ]
+              _c("span", { staticClass: "time_date" }, [
+                _vm._v(
+                  "\n                                    11:01 AM | June 9"
                 ),
               ]),
             ]),
           ]),
         ]),
         _vm._v(" "),
-        _c("p", { staticClass: "text-center top_spac" }, [
-          _vm._v(" Design by "),
-          _c(
-            "a",
-            {
+        _c("div", { staticClass: "outgoing_msg" }, [
+          _c("div", { staticClass: "sent_msg" }, [
+            _c("p", [
+              _vm._v(
+                "\n                                Test which is a new approach to have all\n                                solutions\n                            "
+              ),
+            ]),
+            _vm._v(" "),
+            _c("span", { staticClass: "time_date" }, [
+              _vm._v("\n                                11:01 AM | June 9"),
+            ]),
+          ]),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "incoming_msg" }, [
+          _c("div", { staticClass: "incoming_msg_img" }, [
+            _c("img", {
               attrs: {
-                target: "_blank",
-                href: "https://www.linkedin.com/in/sunil-rajput-nattho-singh/",
+                src: "https://ptetutorials.com/images/user-profile.png",
+                alt: "sunil",
               },
-            },
-            [_vm._v("Sunil Rajput")]
+            }),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "received_msg" }, [
+            _c("div", { staticClass: "received_withd_msg" }, [
+              _c("p", [_vm._v("Test, which is a new approach to have")]),
+              _vm._v(" "),
+              _c("span", { staticClass: "time_date" }, [
+                _vm._v(
+                  "\n                                    11:01 AM | Yesterday"
+                ),
+              ]),
+            ]),
+          ]),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "outgoing_msg" }, [
+          _c("div", { staticClass: "sent_msg" }, [
+            _c("p", [_vm._v("Apollo University, Delhi, India Test")]),
+            _vm._v(" "),
+            _c("span", { staticClass: "time_date" }, [
+              _vm._v(" 11:01 AM | Today"),
+            ]),
+          ]),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "incoming_msg" }, [
+          _c("div", { staticClass: "incoming_msg_img" }, [
+            _c("img", {
+              attrs: {
+                src: "https://ptetutorials.com/images/user-profile.png",
+                alt: "sunil",
+              },
+            }),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "received_msg" }, [
+            _c("div", { staticClass: "received_withd_msg" }, [
+              _c("p", [
+                _vm._v(
+                  "\n                                    We work directly with our designers and\n                                    suppliers, and sell direct to you, which\n                                    means quality, exclusive products, at a\n                                    price anyone can afford.\n                                "
+                ),
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "time_date" }, [
+                _vm._v(
+                  "\n                                    11:01 AM | Today"
+                ),
+              ]),
+            ]),
+          ]),
+        ]),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "type_msg" }, [
+        _c("div", { staticClass: "input_msg_write" }, [
+          _c("input", {
+            staticClass: "write_msg",
+            attrs: { type: "text", placeholder: "Type a message" },
+          }),
+          _vm._v(" "),
+          _c(
+            "button",
+            { staticClass: "msg_send_btn", attrs: { type: "button" } },
+            [
+              _c("i", {
+                staticClass: "fa fa-paper-plane-o",
+                attrs: { "aria-hidden": "true" },
+              }),
+            ]
           ),
         ]),
       ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "text-center top_spac" }, [
+      _vm._v("\n            Design by\n            "),
+      _c(
+        "a",
+        {
+          attrs: {
+            target: "_blank",
+            href: "https://www.linkedin.com/in/sunil-rajput-nattho-singh/",
+          },
+        },
+        [_vm._v("Sunil Rajput")]
+      ),
     ])
   },
 ]
@@ -50889,9 +50845,13 @@ module.exports = function(module) {
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
   \*****************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -50900,6 +50860,8 @@ module.exports = function(module) {
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+
+Vue.prototype.$axios = axios__WEBPACK_IMPORTED_MODULE_0___default.a;
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -50910,7 +50872,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
+Vue.component('dashboard-component', __webpack_require__(/*! ./components/DashboardComponent.vue */ "./resources/js/components/DashboardComponent.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -50968,18 +50930,18 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
-/***/ "./resources/js/components/ExampleComponent.vue":
-/*!******************************************************!*\
-  !*** ./resources/js/components/ExampleComponent.vue ***!
-  \******************************************************/
+/***/ "./resources/js/components/DashboardComponent.vue":
+/*!********************************************************!*\
+  !*** ./resources/js/components/DashboardComponent.vue ***!
+  \********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _ExampleComponent_vue_vue_type_template_id_299e239e_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ExampleComponent.vue?vue&type=template&id=299e239e&scoped=true& */ "./resources/js/components/ExampleComponent.vue?vue&type=template&id=299e239e&scoped=true&");
-/* harmony import */ var _ExampleComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ExampleComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _ExampleComponent_vue_vue_type_style_index_0_id_299e239e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ExampleComponent.vue?vue&type=style&index=0&id=299e239e&scoped=true&lang=css& */ "./resources/js/components/ExampleComponent.vue?vue&type=style&index=0&id=299e239e&scoped=true&lang=css&");
+/* harmony import */ var _DashboardComponent_vue_vue_type_template_id_01ab55f4_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DashboardComponent.vue?vue&type=template&id=01ab55f4&scoped=true& */ "./resources/js/components/DashboardComponent.vue?vue&type=template&id=01ab55f4&scoped=true&");
+/* harmony import */ var _DashboardComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DashboardComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/DashboardComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _DashboardComponent_vue_vue_type_style_index_0_id_01ab55f4_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DashboardComponent.vue?vue&type=style&index=0&id=01ab55f4&scoped=true&lang=css& */ "./resources/js/components/DashboardComponent.vue?vue&type=style&index=0&id=01ab55f4&scoped=true&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -50990,66 +50952,66 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
-  _ExampleComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _ExampleComponent_vue_vue_type_template_id_299e239e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _ExampleComponent_vue_vue_type_template_id_299e239e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _DashboardComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _DashboardComponent_vue_vue_type_template_id_01ab55f4_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _DashboardComponent_vue_vue_type_template_id_01ab55f4_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  "299e239e",
+  "01ab55f4",
   null
   
 )
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/ExampleComponent.vue"
+component.options.__file = "resources/js/components/DashboardComponent.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js&":
-/*!*******************************************************************************!*\
-  !*** ./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js& ***!
-  \*******************************************************************************/
+/***/ "./resources/js/components/DashboardComponent.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/components/DashboardComponent.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./ExampleComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DashboardComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./DashboardComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/DashboardComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DashboardComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/ExampleComponent.vue?vue&type=style&index=0&id=299e239e&scoped=true&lang=css&":
-/*!***************************************************************************************************************!*\
-  !*** ./resources/js/components/ExampleComponent.vue?vue&type=style&index=0&id=299e239e&scoped=true&lang=css& ***!
-  \***************************************************************************************************************/
+/***/ "./resources/js/components/DashboardComponent.vue?vue&type=style&index=0&id=01ab55f4&scoped=true&lang=css&":
+/*!*****************************************************************************************************************!*\
+  !*** ./resources/js/components/DashboardComponent.vue?vue&type=style&index=0&id=01ab55f4&scoped=true&lang=css& ***!
+  \*****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_style_index_0_id_299e239e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./ExampleComponent.vue?vue&type=style&index=0&id=299e239e&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ExampleComponent.vue?vue&type=style&index=0&id=299e239e&scoped=true&lang=css&");
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_style_index_0_id_299e239e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_style_index_0_id_299e239e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_style_index_0_id_299e239e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_style_index_0_id_299e239e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DashboardComponent_vue_vue_type_style_index_0_id_01ab55f4_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./DashboardComponent.vue?vue&type=style&index=0&id=01ab55f4&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/DashboardComponent.vue?vue&type=style&index=0&id=01ab55f4&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DashboardComponent_vue_vue_type_style_index_0_id_01ab55f4_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DashboardComponent_vue_vue_type_style_index_0_id_01ab55f4_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DashboardComponent_vue_vue_type_style_index_0_id_01ab55f4_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DashboardComponent_vue_vue_type_style_index_0_id_01ab55f4_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 
 
 /***/ }),
 
-/***/ "./resources/js/components/ExampleComponent.vue?vue&type=template&id=299e239e&scoped=true&":
-/*!*************************************************************************************************!*\
-  !*** ./resources/js/components/ExampleComponent.vue?vue&type=template&id=299e239e&scoped=true& ***!
-  \*************************************************************************************************/
+/***/ "./resources/js/components/DashboardComponent.vue?vue&type=template&id=01ab55f4&scoped=true&":
+/*!***************************************************************************************************!*\
+  !*** ./resources/js/components/DashboardComponent.vue?vue&type=template&id=01ab55f4&scoped=true& ***!
+  \***************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_template_id_299e239e_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./ExampleComponent.vue?vue&type=template&id=299e239e&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ExampleComponent.vue?vue&type=template&id=299e239e&scoped=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_template_id_299e239e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DashboardComponent_vue_vue_type_template_id_01ab55f4_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./DashboardComponent.vue?vue&type=template&id=01ab55f4&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/DashboardComponent.vue?vue&type=template&id=01ab55f4&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DashboardComponent_vue_vue_type_template_id_01ab55f4_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_template_id_299e239e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DashboardComponent_vue_vue_type_template_id_01ab55f4_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
