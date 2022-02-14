@@ -12,7 +12,7 @@
 This is laravel + vue js demo chat application. 
 
 ## Features List
-   1. User list in side menu
+   1. User list in side contact list
 
 ## License
 
