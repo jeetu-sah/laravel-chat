@@ -2086,22 +2086,54 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "DashboardComponent",
   data: function data() {
     return {
       userChatList: [],
-      attributes: null
+      attributes: null,
+      activeChatTabId: 0,
+      activeChannelMsgHeader: {
+        name: "Default Name"
+      }
     };
   },
   methods: {
+    activeChat: function name(chat) {
+      this.activeChatTabId = chat.id;
+    },
     getUserChatList: function getUserChatList() {
       var _this = this;
 
-      var url = "".concat(baseUrl, "/chat/user-list");
+      var url = "".concat(baseUrl, "/chat/chat-user-list");
       this.$axios.post(url, this.attributes).then(function (response) {
         if (response.status == 200) {
           if (response.data.status == 200) {
+            _this.activeChatTabId = response.data.userList[0].id;
+            _this.activeChannelMsgHeader.name = response.data.userList[0].friend_details.name;
             _this.userChatList = response.data.userList;
             console.log(_this.userChatList);
           }
@@ -38443,40 +38475,53 @@ var render = function () {
                     {
                       key: userIndex,
                       staticClass: "chat_list",
-                      class: userIndex == 0 ? "active_chat" : "",
+                      class:
+                        _vm.activeChatTabId == user.id ? "active_chat" : "",
                     },
                     [
-                      _c("div", { staticClass: "chat_people" }, [
-                        _c("div", { staticClass: "chat_img" }, [
-                          _c("img", {
-                            attrs: {
-                              src: "https://ptetutorials.com/images/user-profile.png",
-                              alt: user.name,
+                      _c(
+                        "div",
+                        {
+                          staticClass: "chat_people",
+                          on: {
+                            click: function ($event) {
+                              $event.preventDefault()
+                              return _vm.activeChat(user)
                             },
-                          }),
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "chat_ib" }, [
-                          _c("h5", [
-                            _vm._v(
-                              "\n                                    " +
-                                _vm._s(user.name) +
-                                "\n                                    "
-                            ),
-                            _c("span", { staticClass: "chat_date" }, [
-                              _vm._v("Dec 25"),
-                            ]),
+                          },
+                        },
+                        [
+                          _c("div", { staticClass: "chat_img" }, [
+                            _c("img", {
+                              attrs: {
+                                src: "https://ptetutorials.com/images/user-profile.png",
+                                alt: user.friend_details.name,
+                              },
+                            }),
                           ]),
                           _vm._v(" "),
-                          _c("p", [
-                            _vm._v(
-                              "\n                                   " +
-                                _vm._s(user.bio) +
-                                "\n                                "
-                            ),
+                          _c("div", { staticClass: "chat_ib" }, [
+                            _c("h5", [
+                              _vm._v(
+                                "\n                                    " +
+                                  _vm._s(user.friend_details.name) +
+                                  "\n                                    "
+                              ),
+                              _c("span", { staticClass: "chat_date" }, [
+                                _vm._v("Dec 25"),
+                              ]),
+                            ]),
+                            _vm._v(" "),
+                            _c("p", [
+                              _vm._v(
+                                "\n                                 \n                                   " +
+                                  _vm._s(user.friend_details.bio) +
+                                  "\n                                "
+                              ),
+                            ]),
                           ]),
-                        ]),
-                      ]),
+                        ]
+                      ),
                     ]
                   )
                 : _c("div", { staticClass: "chat_list" }, [_vm._m(1)])
@@ -38485,10 +38530,18 @@ var render = function () {
           ),
         ]),
         _vm._v(" "),
-        _vm._m(2),
+        _c("div", { staticClass: "headind_srch" }, [
+          _c("div", { staticClass: "recent_heading" }, [
+            _c("h4", [_vm._v(_vm._s(_vm.activeChannelMsgHeader.name))]),
+          ]),
+          _vm._v(" "),
+          _vm._m(2),
+        ]),
+        _vm._v(" "),
+        _vm._m(3),
       ]),
       _vm._v(" "),
-      _vm._m(3),
+      _vm._m(4),
     ]),
   ])
 }
@@ -38547,6 +38600,28 @@ var staticRenderFns = [
           _vm._v(
             "\n                                    Test, which is a new approach to have\n                                    all solutions astrology under one roof.\n                                "
           ),
+        ]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "srch_bar" }, [
+      _c("div", { staticClass: "stylish-input-group" }, [
+        _c("input", {
+          staticClass: "search-bar",
+          attrs: { type: "text", placeholder: "Search" },
+        }),
+        _vm._v(" "),
+        _c("span", { staticClass: "input-group-addon" }, [
+          _c("button", { attrs: { type: "button" } }, [
+            _c("i", {
+              staticClass: "fa fa-search",
+              attrs: { "aria-hidden": "true" },
+            }),
+          ]),
         ]),
       ]),
     ])

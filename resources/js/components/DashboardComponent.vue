@@ -29,22 +29,23 @@
                     <div class="inbox_chat">
                         <div class="chat_list" 
                             v-if="(userChatList.length > 0)"
-                            :class="(userIndex == 0) ? 'active_chat' : ''"
+                            :class="(activeChatTabId == user.id) ? 'active_chat' : ''"
                             v-for="(user, userIndex) in userChatList" :key="userIndex">
-                            <div class="chat_people">
+                            <div class="chat_people" @click.prevent="activeChat(user)">
                                 <div class="chat_img">
                                     <img
                                         src="https://ptetutorials.com/images/user-profile.png"
-                                        :alt="user.name"
+                                        :alt="user.friend_details.name"
                                     />
                                 </div>
                                 <div class="chat_ib">
                                     <h5>
-                                        {{user.name}}
+                                        {{user.friend_details.name}}
                                         <span class="chat_date">Dec 25</span>
                                     </h5>
                                     <p>
-                                       {{user.bio}}
+                                     
+                                       {{user.friend_details.bio}}
                                     </p>
                                 </div>
                             </div>
@@ -68,6 +69,28 @@
                                     </p>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="headind_srch">
+                    <div class="recent_heading">
+                        <h4>{{activeChannelMsgHeader.name}}</h4>
+                    </div>
+                    <div class="srch_bar">
+                        <div class="stylish-input-group">
+                            <input
+                                type="text"
+                                class="search-bar"
+                                placeholder="Search"
+                            />
+                            <span class="input-group-addon">
+                                <button type="button">
+                                    <i
+                                        class="fa fa-search"
+                                        aria-hidden="true"
+                                    ></i>
+                                </button>
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -183,24 +206,33 @@ export default {
         return {
             userChatList: [],
             attributes:null,
+            activeChatTabId:0,
+            activeChannelMsgHeader:{
+                name:"Default Name",
+            },
         };
     },
     methods: {
-      getUserChatList:function () { 
-        let url = `${baseUrl}/chat/user-list`;
-         this.$axios.post(url, this.attributes)
-              .then((response) => {
-                if(response.status == 200){
-                    if(response.data.status == 200){
-                        this.userChatList = response.data.userList;
-                        console.log(this.userChatList)
+        activeChat:function name(chat) {
+            this.activeChatTabId = chat.id;
+        },
+        getUserChatList:function () { 
+            let url = `${baseUrl}/chat/chat-user-list`;
+            this.$axios.post(url, this.attributes)
+                .then((response) => {
+                    if(response.status == 200){
+                        if(response.data.status == 200){
+                            this.activeChatTabId = response.data.userList[0].id;
+                            this.activeChannelMsgHeader.name = response.data.userList[0].friend_details.name;
+                            this.userChatList = response.data.userList;
+                            console.log(this.userChatList)
+                        }
                     }
-                }
-            }).catch((error) => {
-              console.log(error);
-              console.log("Something Went wrong, please try again after sometimes")
-            })
-      }
+                }).catch((error) => {
+                    console.log(error);
+                    console.log("Something Went wrong, please try again after sometimes")
+                })
+        }
     },
     mounted() {
       this.getUserChatList();

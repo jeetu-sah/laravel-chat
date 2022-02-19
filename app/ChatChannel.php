@@ -17,5 +17,16 @@ class ChatChannel extends Model
     ];
 
 
+    public function sender_detail()
+    {
+        return $this->belongsTo('App\User' , 'sender_id');
+    }
+
+    public function receiver_detail()
+    {
+        return $this->belongsTo('App\User' , 'receiver_id');
+    }
+
+
     
 }

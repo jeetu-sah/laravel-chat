@@ -24,5 +24,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::post('/chat/user-list', 'HomeController@chatUserList')->name('home');
+Route::post('/chat/user-list', 'HomeController@userList')->name('home');
+
+Route::post('/chat/chat-user-list', 'HomeController@chatUserList')->name('home');
+
 Route::post('/chat/create-channel', 'HomeController@createChannel');

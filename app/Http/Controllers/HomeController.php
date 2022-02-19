@@ -29,16 +29,43 @@ class HomeController extends Controller {
         return view( 'home' );
     }
 
-    public function chatUserList() {
+    public function userList(){
         if ( Auth::check() ) {
-            $userList = User::where( [ [ 'id', '!=', Auth::user()->id ] ] )->get();
-            if ( $userList->count() > 0 ) {
-                return response()->json( [ 'status' => 200, 'userList' =>$userList ] );
+            $userLists = User::where([['id','!=',Auth::user()->id]])->get();
+            if($userLists->count() > 0){
+                return response()->json( [ 'status' => 200, 'userList' =>$userLists ] );
+            }else {
+                return response()->json( [ 'status' => 100 ] );
             }
         } else {
             return response()->json( [ 'status' => 100 ] );
         }
     }
+
+    public function chatUserList() {
+        if ( Auth::check() ) {
+            $userLists = ChatChannel::where('sender_id',Auth::user()->id)
+                                    ->orwhere('receiver_id',Auth::user()->id)
+                                    ->get();
+            if($userLists->count() > 0){
+                $usersLists = $userLists->map(function($user){
+                    if($user->sender_id == Auth::user()->id){
+                        $user->friend_details = $user->receiver_detail;
+                    }else {
+                         $user->friend_details = $user->sender_detail;
+                    }
+                    return $user;
+                });
+                return response()->json( [ 'status' => 200, 'userList' =>$userLists ] );
+            }else {
+                return response()->json( [ 'status' => 100 ] );
+            }
+        } else {
+            return response()->json( [ 'status' => 100 ] );
+        }
+    }
+
+
 
     public function createChannel() {
         if ( Auth::check() ) {
