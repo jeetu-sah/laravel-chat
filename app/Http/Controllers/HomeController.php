@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use App\User;
 use App\ChatChannel;
 use Auth;
+use App\Messages;
 use phpDocumentor\Reflection\Types\Null_;
+use App\Events\SentMessages;
 
 class HomeController extends Controller {
     /**
@@ -84,6 +86,47 @@ class HomeController extends Controller {
             }else{
                 return response()->json( [ 'status' => 200 ] );
             }
+        }
+    }
+
+    public function sendMsg(){
+        if(!empty(request()->msgText)){
+            $chatChannel = ChatChannel::find(request()->activeChatTabId);
+            if($chatChannel != NULL){
+                $chatChannel->updated_at = now();
+                $chatChannel->save();
+
+                $saveResponse = Messages::create(['chat_channel_id'=>request()->activeChatTabId,
+                                                    'sender_id'=>Auth::user()->id,
+                                                    'messages'=>request()->msgText,
+                                                    'status'=>'read']);
+                if($saveResponse){
+                  
+                    broadcast(new SentMessages($saveResponse));
+
+                    return response()->json( [ 'status'=>200,'chat'=>$saveResponse]);
+                }else{
+                    return response()->json( [ 'status'=>100]);
+                }
+            }else{
+                return response()->json( [ 'status'=>100]);
+            }
+       }else {
+           return response()->json( [ 'status' => 100 ] );
+       }
+    }
+
+
+    public function activeUserChats(){
+        if(Auth::check()){
+            $chatChannel = ChatChannel::with(['message'])->find(request()->id);
+            if($chatChannel){
+                   return response()->json( [ 'status' => 200 , 'chats'=>$chatChannel ] );
+            }else{
+                return response()->json( [ 'status' => 100 ] );
+            }
+        }else {
+              return response()->json( [ 'status' => 100 ] );
         }
     }
 }

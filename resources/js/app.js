@@ -12,6 +12,8 @@ import axios from "axios";
 import VueRouter from "vue-router";
 
 Vue.prototype.$axios = axios;
+Vue.prototype.$eventBus = new Vue(); // Global event bus
+
 
 Vue.use(VueRouter);
 /**
@@ -33,7 +35,6 @@ Vue.component('userlist-component', require('./components/UsersListComponent.vue
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-
 
 
 

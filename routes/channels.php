@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Broadcast;
+use App\ChatChannel;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,12 @@ use Illuminate\Support\Facades\Broadcast;
 |
 */
 
-Broadcast::channel('App.User.{id}', function ($user, $id) {
-    return (int) $user->id === (int) $id;
+
+Broadcast::channel('chat.{chatBodyId}', function ($user , $chatBodyId) {
+    $channelResponse = ChatChannel::find($chatBodyId);
+    if((Auth::user()->id == $channelResponse->sender_id) ||  (Auth::user()->id  == $channelResponse->receiver_id)){
+        return true;
+    }else{
+        return false;
+    } 
 });

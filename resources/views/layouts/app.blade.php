@@ -11,8 +11,7 @@
     <script>
         var baseUrl = "{{ url('') }}";
     </script>
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -20,9 +19,25 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+      <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css" rel="stylesheet" />
   
 </head>
 <body>
+    @if (Auth::check())
+        <script>
+            window.Laravel = {!!json_encode([
+                'isLoggedin' => true,
+                'user' => Auth::user()
+            ])!!}
+        </script>
+    @else
+        <script>
+            window.Laravel = {!!json_encode([
+                'isLoggedin' => false
+            ])!!}
+        </script>
+    @endif
+  
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
@@ -79,5 +94,7 @@
             @yield('content')
         </main>
     </div>
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
 </body>
 </html>

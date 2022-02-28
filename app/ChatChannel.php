@@ -19,14 +19,16 @@ class ChatChannel extends Model
 
     public function sender_detail()
     {
-        return $this->belongsTo('App\User' , 'sender_id');
+        return $this->belongsTo('App\User', 'sender_id');
     }
 
     public function receiver_detail()
     {
-        return $this->belongsTo('App\User' , 'receiver_id');
+        return $this->belongsTo('App\User', 'receiver_id');
     }
 
-
-    
+    public function message()
+    {
+        return $this->hasMany('App\Messages' , 'chat_channel_id');
+    }
 }

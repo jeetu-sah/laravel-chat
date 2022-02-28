@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::post('/broadcasting/auth', 'BroadCastingController')->middleware('auth');
 
 Route::get('/', function () {
     return view('welcome');
@@ -24,7 +28,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::post('/chat/send-msg', 'HomeController@sendMsg');
 Route::post('/chat/user-list', 'HomeController@userList')->name('home');
+Route::post('/chat/active-user-chats', 'HomeController@activeUserChats');
 
 Route::post('/chat/chat-user-list', 'HomeController@chatUserList')->name('home');
 

@@ -26,51 +26,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="inbox_chat">
-                        <div class="chat_list" 
-                            v-if="(userChatList.length > 0)"
-                            :class="(activeChatTabId == user.id) ? 'active_chat' : ''"
-                            v-for="(user, userIndex) in userChatList" :key="userIndex">
-                            <div class="chat_people" @click.prevent="activeChat(user)">
-                                <div class="chat_img">
-                                    <img
-                                        src="https://ptetutorials.com/images/user-profile.png"
-                                        :alt="user.friend_details.name"
-                                    />
-                                </div>
-                                <div class="chat_ib">
-                                    <h5>
-                                        {{user.friend_details.name}}
-                                        <span class="chat_date">Dec 25</span>
-                                    </h5>
-                                    <p>
-                                     
-                                       {{user.friend_details.bio}}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="chat_list" v-else>
-                            <div class="chat_people">
-                                <div class="chat_img">
-                                    <img
-                                        src="https://ptetutorials.com/images/user-profile.png"
-                                        alt="sunil"
-                                    />
-                                </div>
-                                <div class="chat_ib">
-                                    <h5>
-                                        No user chats available
-                                        <span class="chat_date">Dec 25</span>
-                                    </h5>
-                                    <p>
-                                        Test, which is a new approach to have
-                                        all solutions astrology under one roof.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <ContactList />
+                   
                 </div>
                 <div class="headind_srch">
                     <div class="recent_heading">
@@ -95,19 +52,30 @@
                     </div>
                 </div>
                 <div class="mesgs">
-                    <div class="msg_history">
-                        <div class="incoming_msg">
-                            <div class="incoming_msg_img">
-                                <img
-                                    src="https://ptetutorials.com/images/user-profile.png"
-                                    alt="sunil"
-                                />
+                    <div class="msg_history" id="msgHistory">
+                        <div class="msgBlock" v-for="(chat , chatIndex) in activeChannelMsgBody.chats" :key="chatIndex">
+                            <div class="incoming_msg" v-if="(chat.sender_id != user.id)">
+                                <div class="incoming_msg_img">
+                                    <img
+                                        src="https://ptetutorials.com/images/user-profile.png"
+                                        alt="sunil"
+                                    />
+                                </div>
+                                <div class="received_msg">
+                                    <div class="received_withd_msg">
+                                        <p>
+                                            {{chat.messages}}
+                                        </p>
+                                        <span class="time_date">
+                                            11:01 AM | June 9</span
+                                        >
+                                    </div>
+                                </div>
                             </div>
-                            <div class="received_msg">
-                                <div class="received_withd_msg">
+                            <div class="outgoing_msg" v-else>
+                                <div class="sent_msg">
                                     <p>
-                                        Test which is a new approach to have all
-                                        solutions
+                                          {{chat.messages}}
                                     </p>
                                     <span class="time_date">
                                         11:01 AM | June 9</span
@@ -115,129 +83,107 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="outgoing_msg">
-                            <div class="sent_msg">
-                                <p>
-                                    Test which is a new approach to have all
-                                    solutions
-                                </p>
-                                <span class="time_date">
-                                    11:01 AM | June 9</span
-                                >
-                            </div>
-                        </div>
-                        <div class="incoming_msg">
-                            <div class="incoming_msg_img">
-                                <img
-                                    src="https://ptetutorials.com/images/user-profile.png"
-                                    alt="sunil"
-                                />
-                            </div>
-                            <div class="received_msg">
-                                <div class="received_withd_msg">
-                                    <p>Test, which is a new approach to have</p>
-                                    <span class="time_date">
-                                        11:01 AM | Yesterday</span
-                                    >
-                                </div>
-                            </div>
-                        </div>
-                        <div class="outgoing_msg">
-                            <div class="sent_msg">
-                                <p>Apollo University, Delhi, India Test</p>
-                                <span class="time_date"> 11:01 AM | Today</span>
-                            </div>
-                        </div>
-                        <div class="incoming_msg">
-                            <div class="incoming_msg_img">
-                                <img
-                                    src="https://ptetutorials.com/images/user-profile.png"
-                                    alt="sunil"
-                                />
-                            </div>
-                            <div class="received_msg">
-                                <div class="received_withd_msg">
-                                    <p>
-                                        We work directly with our designers and
-                                        suppliers, and sell direct to you, which
-                                        means quality, exclusive products, at a
-                                        price anyone can afford.
-                                    </p>
-                                    <span class="time_date">
-                                        11:01 AM | Today</span
-                                    >
-                                </div>
-                            </div>
+                        <div v-if="(activeChannelMsgBody.chats.length < 1)">
+                            <h3 class="no_chats">No Chats available!!!</h3>
                         </div>
                     </div>
-                    <div class="type_msg">
-                        <div class="input_msg_write">
-                            <input
-                                type="text"
-                                class="write_msg"
-                                placeholder="Type a message"
-                            />
-                            <button class="msg_send_btn" type="button">
-                                <i
-                                    class="fa fa-paper-plane-o"
-                                    aria-hidden="true"
-                                ></i>
-                            </button>
+                    <form @submit.prevent="" id="bottom_div">
+                        <div class="type_msg">
+                            <div class="input_msg_write">
+                                <input
+                                    v-model="activeChannelMsgBody.msgText"
+                                    @keyup.enter="sendMsgToUser($event)"
+                                    type="text"
+                                    class="write_msg"
+                                    placeholder="Type a message"
+                                />
+                                <button class="msg_send_btn" type="submit">
+                                    <i
+                                        class="fa fa-paper-plane-o"
+                                        aria-hidden="true"
+                                    ></i>
+                                </button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
-            <p class="text-center top_spac">
-                Design by
-                <a
-                    target="_blank"
-                    href="https://www.linkedin.com/in/sunil-rajput-nattho-singh/"
-                    >Sunil Rajput</a
-                >
-            </p>
         </div>
     </div>
 </template>
-
 <script>
+import ContactList from './ContactlistComponent.vue';
 export default {
     name: "DashboardComponent",
+    components: {
+        ContactList,
+    },
     data() {
         return {
             userChatList: [],
             attributes:null,
-            activeChatTabId:0,
+            activeChatTabId:null,
             activeChannelMsgHeader:{
-                name:"Default Name",
+                name:"Default Name"
             },
+            activeChannelMsgBody:{
+                msgText:null,
+                activeChatTabId:null,
+                chats:[],
+            },
+            user: window.Laravel.user,
         };
     },
     methods: {
-        activeChat:function name(chat) {
-            this.activeChatTabId = chat.id;
-        },
-        getUserChatList:function () { 
-            let url = `${baseUrl}/chat/chat-user-list`;
-            this.$axios.post(url, this.attributes)
+        getActiveUserChat:function (user) {
+            let url = `${baseUrl}/chat/active-user-chats`;
+            this.$axios.post(url, user)
                 .then((response) => {
                     if(response.status == 200){
                         if(response.data.status == 200){
-                            this.activeChatTabId = response.data.userList[0].id;
-                            this.activeChannelMsgHeader.name = response.data.userList[0].friend_details.name;
-                            this.userChatList = response.data.userList;
-                            console.log(this.userChatList)
+                           this.activeChannelMsgBody.chats = response.data.chats.message;
                         }
                     }
                 }).catch((error) => {
                     console.log(error);
                     console.log("Something Went wrong, please try again after sometimes")
                 })
-        }
+        },
+        sendMsgToUser:function(event) {
+            this.activeChannelMsgBody.msgText = event.target.value;
+            this.activeChannelMsgBody.activeChatTabId = this.activeChatTabId;
+            let url = `${baseUrl}/chat/send-msg`;
+            this.$axios.post(url, this.activeChannelMsgBody)
+                .then((response) => {
+                    console.log("Messages sent successfuly.")
+                }).catch((error) => {
+                    console.log(error);
+                    console.log("Something Went wrong, please try again after sometimes")
+                })
+        },
     },
     mounted() {
-      this.getUserChatList();
+        //Listen events
+        var chatHistorythis = this;
+        this.$eventBus.$on('activeChatTab', function(userChannelResponse) {
+                console.log('userChannelResponse')
+                console.log(userChannelResponse)
+                chatHistorythis.activeChatTabId = userChannelResponse.id;
+                chatHistorythis.activeChannelMsgHeader.name = userChannelResponse.friend_details.name;
 
+                Echo.private(`chat.${userChannelResponse.id}`)
+                    .listen('.server.created', (e) => {
+                        chatHistorythis.activeChannelMsgBody.chats.push(e.chatBody);
+                        chatHistorythis.activeChannelMsgBody.msgText = null;
+                    });
+                chatHistorythis.getActiveUserChat(userChannelResponse);
+        });
     },
+    updated() {
+        this.$nextTick(function () {
+            $('#msgHistory').scrollTop($('#msgHistory')[0].scrollHeight);
+        });
+    }
 };
 </script>
 <style scoped>
@@ -254,6 +200,10 @@ img {
     overflow: hidden;
     width: 30%;
     border-right: 1px solid #c4c4c4;
+}
+.no_chats{
+    text-align: center;
+     margin-top: 25px;
 }
 .inbox_msg {
     border: 1px solid #c4c4c4;
@@ -334,6 +284,7 @@ img {
     border-bottom: 1px solid #c4c4c4;
     margin: 0;
     padding: 18px 16px 10px;
+    cursor: pointer;
 }
 .inbox_chat {
     height: 550px;
@@ -374,10 +325,9 @@ img {
 }
 .mesgs {
     float: left;
-    padding: 30px 15px 0 25px;
+    padding: 9px 0px 0 19px;
     width: 70%;
 }
-
 .sent_msg p {
     background: #05728f none repeat scroll 0 0;
     border-radius: 3px;
@@ -406,7 +356,7 @@ img {
 
 .type_msg {
     border-top: 1px solid #c4c4c4;
-    position: relative;
+    position: relative;    
 }
 .msg_send_btn {
     background: #05728f none repeat scroll 0 0;

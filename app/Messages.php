@@ -10,6 +10,7 @@ class Messages extends Model
     use SoftDeletes;
 
     protected $table = 'messages';
+    
     protected $fillable = [
         'id',
         'chat_channel_id',
