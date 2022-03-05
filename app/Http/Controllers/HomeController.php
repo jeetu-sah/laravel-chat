@@ -48,6 +48,7 @@ class HomeController extends Controller {
         if ( Auth::check() ) {
             $userLists = ChatChannel::where('sender_id',Auth::user()->id)
                                     ->orwhere('receiver_id',Auth::user()->id)
+                                    ->orderBy('updated_at','DESC')
                                     ->get();
             if($userLists->count() > 0){
                 $usersLists = $userLists->map(function($user){

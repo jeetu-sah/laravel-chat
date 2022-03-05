@@ -197,7 +197,12 @@ export default {
                             this.userChatList.forEach(element => {
                                 Echo.private(`chat.${element.id}`)
                                     .listen('.server.created', (e) => {
-                                        this.activeChannelMsgBody.chats.push(e.chatBody);
+                                        console.log(this.activeChatTabId)
+                                        console.log(e)
+                                        if(this.activeChatTabId == e.chatBodyId){
+                                            this.activeChannelMsgBody.chats.push(e.chatBody);
+                                        }
+
                                         this.activeChannelMsgBody.msgText = null;
                                     });
                             });
@@ -357,6 +362,7 @@ img {
 .incoming_msg_img {
     display: inline-block;
     width: 6%;
+    padding:10px;
 }
 .received_msg {
     display: inline-block;
