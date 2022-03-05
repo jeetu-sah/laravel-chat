@@ -26,8 +26,51 @@
                             </div>
                         </div>
                     </div>
-                    <ContactList />
-                   
+                    <div class="inbox_chat">
+                        <div class="chat_list" 
+                            v-if="(userChatList.length > 0)"
+                            :class="(activeChatTabId == user.id) ? 'active_chat' : ''"
+                            v-for="(user, userIndex) in userChatList" :key="userIndex"
+                            @click.prevent="activeChat(user)"  >
+                            <div class="chat_people">
+                                <div class="chat_img">
+                                    <img
+                                        src="https://ptetutorials.com/images/user-profile.png"
+                                        :alt="user.friend_details.name"
+                                    />
+                                </div>
+                                <div class="chat_ib">
+                                    <h5>
+                                        {{user.friend_details.name}}
+                                        <span class="chat_date">Dec 25</span>
+                                    </h5>
+                                    <p>
+                                        {{user.friend_details.bio}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chat_list" v-else>
+                            <div class="chat_people">
+                                <div class="chat_img">
+                                    <img
+                                        src="https://ptetutorials.com/images/user-profile.png"
+                                        alt="sunil"
+                                    />
+                                </div>
+                                <div class="chat_ib">
+                                    <h5>
+                                        No user chats available
+                                        <span class="chat_date">Dec 25</span>
+                                    </h5>
+                                    <p>
+                                        Test, which is a new approach to have
+                                        all solutions astrology under one roof.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="headind_srch">
                     <div class="recent_heading">
@@ -52,7 +95,7 @@
                     </div>
                 </div>
                 <div class="mesgs">
-                    <div class="msg_history" id="msgHistory">
+                    <div class="msg_history" id="msgHistory" style="margin-bottom:20px;">
                         <div class="msgBlock" v-for="(chat , chatIndex) in activeChannelMsgBody.chats" :key="chatIndex">
                             <div class="incoming_msg" v-if="(chat.sender_id != user.id)">
                                 <div class="incoming_msg_img">
@@ -135,6 +178,36 @@ export default {
         };
     },
     methods: {
+        activeChat:function(chat) {
+            this.activeChatTabId = chat.id;
+            this.activeChannelMsgBody.msgText = null;
+            this.activeChannelMsgHeader.name = chat.friend_details.name;
+            this.getActiveUserChat(chat);
+        },
+        getUserChatList:function () { 
+            let url = `${baseUrl}/chat/chat-user-list`;
+            this.$axios.post(url, this.attributes)
+                .then((response) => {
+                    if(response.status == 200){
+                        if(response.data.status == 200){
+                            this.activeChat(response.data.userList[0]);
+                            this.userChatList = response.data.userList;
+                            //load active chat
+                            //load and create channel of tables.
+                            this.userChatList.forEach(element => {
+                                Echo.private(`chat.${element.id}`)
+                                    .listen('.server.created', (e) => {
+                                        this.activeChannelMsgBody.chats.push(e.chatBody);
+                                        this.activeChannelMsgBody.msgText = null;
+                                    });
+                            });
+                        }
+                    }
+                }).catch((error) => {
+                    console.log(error);
+                    console.log("Something Went wrong, please try again after sometimes")
+                })
+        },
         getActiveUserChat:function (user) {
             let url = `${baseUrl}/chat/active-user-chats`;
             this.$axios.post(url, user)
@@ -158,26 +231,12 @@ export default {
                     console.log("Messages sent successfuly.")
                 }).catch((error) => {
                     console.log(error);
-                    console.log("Something Went wrong, please try again after sometimes")
+                    console.log("Something Went wrong, please try again after sometimes");
                 })
         },
     },
     mounted() {
-        //Listen events
-        var chatHistorythis = this;
-        this.$eventBus.$on('activeChatTab', function(userChannelResponse) {
-                console.log('userChannelResponse')
-                console.log(userChannelResponse)
-                chatHistorythis.activeChatTabId = userChannelResponse.id;
-                chatHistorythis.activeChannelMsgHeader.name = userChannelResponse.friend_details.name;
-
-                Echo.private(`chat.${userChannelResponse.id}`)
-                    .listen('.server.created', (e) => {
-                        chatHistorythis.activeChannelMsgBody.chats.push(e.chatBody);
-                        chatHistorythis.activeChannelMsgBody.msgText = null;
-                    });
-                chatHistorythis.getActiveUserChat(userChannelResponse);
-        });
+        this.getUserChatList();
     },
     updated() {
         this.$nextTick(function () {

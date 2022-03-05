@@ -16,7 +16,6 @@ class ChatChannel extends Model
         'updated_at',
     ];
 
-
     public function sender_detail()
     {
         return $this->belongsTo('App\User', 'sender_id');

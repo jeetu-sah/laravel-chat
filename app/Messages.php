@@ -22,4 +22,15 @@ class Messages extends Model
         'updated_at',
     ];
 
+    protected $touches = ['chatChannels'];
+
+    /**
+     * Get the post that the comment belongs to.
+     */
+    public function chatChannels()
+    {
+        return $this->belongsTo(ChatChannel::class , 'chat_channel_id');
+    }
+
+
 }

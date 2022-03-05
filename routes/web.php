@@ -26,12 +26,11 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::prefix('chat')->group(function () {
+    Route::post('/send-msg', 'HomeController@sendMsg');
+    Route::post('/user-list', 'HomeController@userList')->name('home');
+    Route::post('/active-user-chats', 'HomeController@activeUserChats');
+    Route::post('/chat-user-list', 'HomeController@chatUserList')->name('home');
+    Route::post('/create-channel', 'HomeController@createChannel');
+});
 
-Route::post('/chat/send-msg', 'HomeController@sendMsg');
-Route::post('/chat/user-list', 'HomeController@userList')->name('home');
-Route::post('/chat/active-user-chats', 'HomeController@activeUserChats');
-
-Route::post('/chat/chat-user-list', 'HomeController@chatUserList')->name('home');
-
-Route::post('/chat/create-channel', 'HomeController@createChannel');

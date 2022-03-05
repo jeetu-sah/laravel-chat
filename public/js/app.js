@@ -2121,6 +2121,49 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "DashboardComponent",
@@ -2144,14 +2187,46 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    getActiveUserChat: function getActiveUserChat(user) {
+    activeChat: function activeChat(chat) {
+      this.activeChatTabId = chat.id;
+      this.activeChannelMsgBody.msgText = null;
+      this.activeChannelMsgHeader.name = chat.friend_details.name;
+      this.getActiveUserChat(chat);
+    },
+    getUserChatList: function getUserChatList() {
       var _this = this;
+
+      var url = "".concat(baseUrl, "/chat/chat-user-list");
+      this.$axios.post(url, this.attributes).then(function (response) {
+        if (response.status == 200) {
+          if (response.data.status == 200) {
+            _this.activeChat(response.data.userList[0]);
+
+            _this.userChatList = response.data.userList; //load active chat
+            //load and create channel of tables.
+
+            _this.userChatList.forEach(function (element) {
+              Echo["private"]("chat.".concat(element.id)).listen('.server.created', function (e) {
+                _this.activeChannelMsgBody.chats.push(e.chatBody);
+
+                _this.activeChannelMsgBody.msgText = null;
+              });
+            });
+          }
+        }
+      })["catch"](function (error) {
+        console.log(error);
+        console.log("Something Went wrong, please try again after sometimes");
+      });
+    },
+    getActiveUserChat: function getActiveUserChat(user) {
+      var _this2 = this;
 
       var url = "".concat(baseUrl, "/chat/active-user-chats");
       this.$axios.post(url, user).then(function (response) {
         if (response.status == 200) {
           if (response.data.status == 200) {
-            _this.activeChannelMsgBody.chats = response.data.chats.message;
+            _this2.activeChannelMsgBody.chats = response.data.chats.message;
           }
         }
       })["catch"](function (error) {
@@ -2172,19 +2247,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
-    //Listen events
-    var chatHistorythis = this;
-    this.$eventBus.$on('activeChatTab', function (userChannelResponse) {
-      console.log('userChannelResponse');
-      console.log(userChannelResponse);
-      chatHistorythis.activeChatTabId = userChannelResponse.id;
-      chatHistorythis.activeChannelMsgHeader.name = userChannelResponse.friend_details.name;
-      Echo["private"]("chat.".concat(userChannelResponse.id)).listen('.server.created', function (e) {
-        chatHistorythis.activeChannelMsgBody.chats.push(e.chatBody);
-        chatHistorythis.activeChannelMsgBody.msgText = null;
-      });
-      chatHistorythis.getActiveUserChat(userChannelResponse);
-    });
+    this.getUserChatList();
   },
   updated: function updated() {
     this.$nextTick(function () {
@@ -44820,25 +44883,84 @@ var render = function () {
     _vm._v(" "),
     _c("div", { staticClass: "messaging" }, [
       _c("div", { staticClass: "inbox_msg" }, [
-        _c(
-          "div",
-          { staticClass: "inbox_people" },
-          [_vm._m(0), _vm._v(" "), _c("ContactList")],
-          1
-        ),
+        _c("div", { staticClass: "inbox_people" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "inbox_chat" },
+            _vm._l(_vm.userChatList, function (user, userIndex) {
+              return _vm.userChatList.length > 0
+                ? _c(
+                    "div",
+                    {
+                      key: userIndex,
+                      staticClass: "chat_list",
+                      class:
+                        _vm.activeChatTabId == user.id ? "active_chat" : "",
+                      on: {
+                        click: function ($event) {
+                          $event.preventDefault()
+                          return _vm.activeChat(user)
+                        },
+                      },
+                    },
+                    [
+                      _c("div", { staticClass: "chat_people" }, [
+                        _c("div", { staticClass: "chat_img" }, [
+                          _c("img", {
+                            attrs: {
+                              src: "https://ptetutorials.com/images/user-profile.png",
+                              alt: user.friend_details.name,
+                            },
+                          }),
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "chat_ib" }, [
+                          _c("h5", [
+                            _vm._v(
+                              "\n                                    " +
+                                _vm._s(user.friend_details.name) +
+                                "\n                                    "
+                            ),
+                            _c("span", { staticClass: "chat_date" }, [
+                              _vm._v("Dec 25"),
+                            ]),
+                          ]),
+                          _vm._v(" "),
+                          _c("p", [
+                            _vm._v(
+                              "\n                                    " +
+                                _vm._s(user.friend_details.bio) +
+                                "\n                                "
+                            ),
+                          ]),
+                        ]),
+                      ]),
+                    ]
+                  )
+                : _c("div", { staticClass: "chat_list" }, [_vm._m(1)])
+            }),
+            0
+          ),
+        ]),
         _vm._v(" "),
         _c("div", { staticClass: "headind_srch" }, [
           _c("div", { staticClass: "recent_heading" }, [
             _c("h4", [_vm._v(_vm._s(_vm.activeChannelMsgHeader.name))]),
           ]),
           _vm._v(" "),
-          _vm._m(1),
+          _vm._m(2),
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "mesgs" }, [
           _c(
             "div",
-            { staticClass: "msg_history", attrs: { id: "msgHistory" } },
+            {
+              staticClass: "msg_history",
+              staticStyle: { "margin-bottom": "20px" },
+              attrs: { id: "msgHistory" },
+            },
             [
               _vm._l(
                 _vm.activeChannelMsgBody.chats,
@@ -44849,7 +44971,7 @@ var render = function () {
                     [
                       chat.sender_id != _vm.user.id
                         ? _c("div", { staticClass: "incoming_msg" }, [
-                            _vm._m(2, true),
+                            _vm._m(3, true),
                             _vm._v(" "),
                             _c("div", { staticClass: "received_msg" }, [
                               _c("div", { staticClass: "received_withd_msg" }, [
@@ -44956,7 +45078,7 @@ var render = function () {
                     },
                   }),
                   _vm._v(" "),
-                  _vm._m(3),
+                  _vm._m(4),
                 ]),
               ]),
             ]
@@ -44991,6 +45113,36 @@ var staticRenderFns = [
               }),
             ]),
           ]),
+        ]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "chat_people" }, [
+      _c("div", { staticClass: "chat_img" }, [
+        _c("img", {
+          attrs: {
+            src: "https://ptetutorials.com/images/user-profile.png",
+            alt: "sunil",
+          },
+        }),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "chat_ib" }, [
+        _c("h5", [
+          _vm._v(
+            "\n                                    No user chats available\n                                    "
+          ),
+          _c("span", { staticClass: "chat_date" }, [_vm._v("Dec 25")]),
+        ]),
+        _vm._v(" "),
+        _c("p", [
+          _vm._v(
+            "\n                                    Test, which is a new approach to have\n                                    all solutions astrology under one roof.\n                                "
+          ),
         ]),
       ]),
     ])
@@ -60518,6 +60670,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
+/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./router */ "./resources/js/router.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -60526,6 +60679,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+
 
 
 Vue.prototype.$axios = axios__WEBPACK_IMPORTED_MODULE_0___default.a;
@@ -60543,7 +60697,7 @@ Vue.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('dashboard-component', __webpack_require__(/*! ./components/DashboardComponent.vue */ "./resources/js/components/DashboardComponent.vue")["default"]);
-Vue.component('userlist-component', __webpack_require__(/*! ./components/UsersListComponent.vue */ "./resources/js/components/UsersListComponent.vue")["default"]);
+Vue.component('userlist-component', __webpack_require__(/*! ./components/UsersListComponent.vue */ "./resources/js/components/UsersListComponent.vue"));
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -60551,7 +60705,8 @@ Vue.component('userlist-component', __webpack_require__(/*! ./components/UsersLi
  */
 
 var app = new Vue({
-  el: '#app'
+  router: _router__WEBPACK_IMPORTED_MODULE_2__["default"],
+  el: "#app"
 });
 
 /***/ }),
@@ -60860,6 +61015,36 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UsersListComponent_vue_vue_type_template_id_884c99fc___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
+
+/***/ }),
+
+/***/ "./resources/js/router.js":
+/*!********************************!*\
+  !*** ./resources/js/router.js ***!
+  \********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
+/* harmony import */ var _components_DashboardComponent_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/DashboardComponent.vue */ "./resources/js/components/DashboardComponent.vue");
+
+
+
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
+var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
+  mode: "history",
+  linkExactActiveClass: "active",
+  routes: [{
+    path: "/",
+    name: "home",
+    component: _components_DashboardComponent_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+  }]
+});
+/* harmony default export */ __webpack_exports__["default"] = (router);
 
 /***/ }),
 

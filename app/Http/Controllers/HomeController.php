@@ -71,10 +71,10 @@ class HomeController extends Controller {
 
     public function createChannel() {
         if ( Auth::check() ) {
-            $existUser = ChatChannel::where( [ [ 'sender_id', '=', Auth::user()->id],
-                                                [ 'receiver_id', '=', request()->id ] ] )
-                                                ->orWhere( [ [ 'sender_id', '=', request()->id ],
-                                                [ 'receiver_id', '=', Auth::user()->id ] ] )
+            $existUser = ChatChannel::where([['sender_id','=',Auth::user()->id],
+                                                ['receiver_id','=',request()->id ] ] )
+                                                ->orWhere([['sender_id','=',request()->id ],
+                                                [ 'receiver_id','=',Auth::user()->id ] ] )
                                                 ->first();
             if($existUser == Null){
                 $createChannel = ChatChannel::create(['sender_id'=>Auth::user()->id, 'receiver_id'=>request()->id]);
@@ -93,17 +93,12 @@ class HomeController extends Controller {
         if(!empty(request()->msgText)){
             $chatChannel = ChatChannel::find(request()->activeChatTabId);
             if($chatChannel != NULL){
-                $chatChannel->updated_at = now();
-                $chatChannel->save();
-
                 $saveResponse = Messages::create(['chat_channel_id'=>request()->activeChatTabId,
                                                     'sender_id'=>Auth::user()->id,
                                                     'messages'=>request()->msgText,
                                                     'status'=>'read']);
                 if($saveResponse){
-                  
                     broadcast(new SentMessages($saveResponse));
-
                     return response()->json( [ 'status'=>200,'chat'=>$saveResponse]);
                 }else{
                     return response()->json( [ 'status'=>100]);
