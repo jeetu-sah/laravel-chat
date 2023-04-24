@@ -16,9 +16,7 @@ This is laravel + vue js demo chat application.
    1. Clone the repository
    2. composer update
    3. php artisan migrate
-   4. npm run watch
-   5. php artisan db:seed --class=EcardCategorySeeder
-   6. php artisan db:seed --class=ProductAttributeSeeder
+   4. php artisan serve
    
 ## Features List
    1. User list in side contact list
