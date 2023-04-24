@@ -12,18 +12,17 @@ This is laravel + vue js demo chat application.
    3. Node v14.19.0
    4. npm 8.3.1
 
-## Features List
-   1. User list in side contact list
-   2. List Contact list 
-   3. Show Chat history
-   4. One to one chat using Laravel Broadcasting  
-
-
 ## Installation Process
    1. Clone the repository
    2. composer update
    3. php artisan migrate
    4. php artisan serve
+   
+## Features List
+   1. User list in side contact list
+   2. List Contact list 
+   3. Show Chat history
+   4. One to one chat using Laravel Broadcasting  
 
 ## License
 
